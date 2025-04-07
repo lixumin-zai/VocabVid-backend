@@ -1,0 +1,7 @@
+python-jose[cryptography] 
+passlib[bcrypt]
+uvicorn
+fastapi
+google-generator
+bcrypt
+python-multipart

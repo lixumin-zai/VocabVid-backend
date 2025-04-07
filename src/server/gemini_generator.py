@@ -55,7 +55,7 @@ Each component element plays a critical role in the success of the project.
 """)
         ]
     
-    def generate(self, prompt, stream=True):
+    def get_example_senctence(self, prompt, stream=True):
         """
         生成内容
         
@@ -86,7 +86,7 @@ Each component element plays a critical role in the success of the project.
                 contents=contents,
                 config=generate_content_config,
             ):
-                print(chunk.text, end="")
+                yield chunk.text
         else:
             response = self.client.models.generate_content(
                 model=self.model,
