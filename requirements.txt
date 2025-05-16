@@ -2,6 +2,6 @@ python-jose[cryptography]
 passlib[bcrypt]
 uvicorn
 fastapi
-google-generator
+google-genai
 bcrypt
 python-multipart

@@ -13,7 +13,7 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from pydantic import BaseModel
 from PIL import Image
-
+import requests
 from setup_logging import setup_logging
 from module import Words
 logger = logging.getLogger(__name__)
@@ -175,9 +175,22 @@ async def gen_sentence(words: Words, current_user: User = Depends(get_current_ac
 
     return StreamingResponse(manager.get_example_senctence(words.words), media_type="text/event-stream")
 
+# 定义一个需要认证的路由
+@app.get("/gpu/info")
+async def gen_sentence():
+    requests_url = os.getenv("gpu_url")
+    return requests.get(requests_url).json()
+
+# 定义一个需要认证的路由
+@app.get("/okx")
+async def gen_sentence():
+    requests_url = os.getenv("okx_url")
+    return requests.get(requests_url).json()
+
+
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=20050, workers=1)
 
-#  nohup python main.py > main.log &
+#  nohup python main.py > log.log &
